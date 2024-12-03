@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+    
+{% load static %}
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <center><h1>Medico</h1></center>
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="registrarMedico/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidmedico" name="txtidmedico" class="form-control" placeholder="ID del medico" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder= "Nombre del Medico" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtapellido" name="txtapellido" class="form-control" placeholder="Apellidos del Medico" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtespecialidad" name="txtespecialidad" class="form-control" placeholder="Especialidad" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txttelefono" name="txttelefono" class="form-control" placeholder="Telefono" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcorreo" name="txtcorreo" class="form-control" placeholder="Correo" maxlength="100" required>
+                    </div>
+                    
+                    <div class="form-group py-2">
+                        <input type="date" id="txtfechac" name="txtfechac" class="form-control" maxlength="100" required>
+                    </div>
+                    
+                    <div class="form-group py-2">
+                        <center><button type="submit" class="btn btn-dark">Guardar Medico</button></center>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <center><h1>Lista de medicos</h1></center>
+
+        <table class="table table-striped">
+            <center><img src="{% static 'images/doctor.jpg' %}" alt="Imagen de receta" class="img-fluid" width="400"></center>
+            <thead>
+                
+                <tr>
+                    <th scope="col">ID del medico</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Especialidad</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Fecha de contratacion</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in mismedicos %}
+                    <tr>
+                        <td> {{m.idmedico}} </td>
+                        <td> {{m.nombre}} </td>
+                        <td> {{m.apellido}} </td>
+                        <td> {{m.especialidad}} </td>
+                        <td> {{m.telefono}} </td>
+                        <td> {{m.correo}} </td>
+                        <td> {{m.fechadecontratacion}} </td>
+
+                        
+                        <td><a href="seleccionarMedico/{{m.idmedico}}" class="btn btn-secondary">Editar</a></td>
+                        <td><a href="borrarMedico/{{m.idmedico}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    </div>
+
+</div>
+{% endblock %}
