@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"> <!-- Fila en editar-->
+    <div class="col-md-4 offset-md-4">
+        <center><h2>Editar Medicamento</h2></center>
+
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="/Medicamento/editarMedicamento/" method="POST"> {% csrf_token %} 
+                    <div class="form-group py-2">
+                        <input type="text" id="numidmedicamento" name="numidmedicamento" class="form-control" value="{{mismedicamentos.id_medicamento}}" minlength="1" maxlength="6" readonly required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{mismedicamentos.nombre}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtdescripcion" name="txtdescripcion" class="form-control" value="{{mismedicamentos.descripcion}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtdosis" name="txtdosis" class="form-control" value="{{mismedicamentos.dosis}}" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="numfrecuencia" name="numfrecuencia" class="form-control" value="{{mismedicamentos.frecuencia}}" minlength="1" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtefectos" name="txtefectos" class="form-control" value="{{mismedicamentos.efectos}}" minlength="1" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtprecio" name="txtprecio" class="form-control" value="${{mismedicamentos.precio}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <center><button type="submit" class="btn btn-dark">Editar medicamento del Hospital</button></center>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+        <!-- Aquí codigo tarjeta -->
+    </div> 
+</div> <!-- Fila en editar-->
+
+{% endblock %}

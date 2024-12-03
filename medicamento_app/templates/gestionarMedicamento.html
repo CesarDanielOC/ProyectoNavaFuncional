@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+{% load static %}
+
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <center><h1>Medicamento</h1>
+            <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="registrarMedicamento/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group py-2">
+                        <input type="text" id="numidmedicamento" name="numidmedicamento" class="form-control" placeholder="ID Medicamento" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre del medicamento" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtdescripcion" name="txtdescripcion" class="form-control" placeholder="Descripcion" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtdosis" name="txtdosis" class="form-control" placeholder="Dosis" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="numfrecuencia" name="numfrecuencia" class="form-control" placeholder="Frecuencia" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtefectos" name="txtefectos" class="form-control" placeholder="Efectos Secundarios" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtprecio" name="txtprecio" class="form-control" placeholder="Precio" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                    <center><button type="submit" class="btn btn-dark">Ingresar medicamento al Hospital</button></center>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- Columna derecha -->
+        <center><h1>Medicamento</h1>
+        
+
+        <!-- La tabla -->
+        <table class="table table-striped">
+            <center><img src="{% static 'images/medicamento.jpg' %}" alt="Imagen de receta" class="img-fluid" width="400"></center>
+        
+            <thead>
+                <tr>
+                    <th scope="col">ID del medicamento</th>
+                    <th scope="col">Nombre del medicamento</th>
+                    <th scope="col">Descripcion del medicamento</th>
+                    <th scope="col">Dosis</th>
+                    <th scope="col">Frecuencia</th>
+                    <th scope="col">Efectos secundarios</th>
+                    <th scope="col">Precio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in mismedicamentos %}
+                    <tr>
+                        <td> {{m.id_medicamento}} </td>
+                        <td> {{m.nombre}} </td>
+                        <td> {{m.descripcion}} </td>
+                        <td> {{m.dosis}} </td>
+                        <td> {{m.frecuencia}} </td>
+                        <td> {{m.efectos}} </td>
+                        <td> ${{m.precio}} </td>
+                        <td><a href="seleccionarMedicamento/{{m.id_medicamento}}" class="btn btn-secondary">Editar</a></td> <!-- Falta -->
+                        <td><a href="borrarMedicamento/{{m.id_medicamento}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <!-- La tabla -->
+    </div> <!-- Columna derecha -->
+
+</div> <!--La fila-->
+{% endblock %}

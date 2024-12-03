@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"> <!-- Fila en editar-->
+    <div class="col-md-4 offset-md-4">
+        <center><h2>Editar Cita</h2></center>
+
+        <div class="card">
+            <div class="card-body">
+                <form action="/Citas/editarCitas/" method="POST"> {% csrf_token %}
+                    <div class="form-group py-2">
+                        <!-- Asegúrate de quitar 'disabled' y mantener 'readonly' -->
+                        <input type="text" id="txtidcitas" name="txtidcitas" class="form-control" value="{{ miscitas.idcita }}" minlength="1" maxlength="6" readonly>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidpaciente" name="txtidpaciente" class="form-control" value="{{ miscitas.idpaciente }}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidmedico" name="txtidmedico" class="form-control" value="{{ miscitas.idmedico }}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="date" id="txtfechacita" name="txtfechacita" class="form-control" value="{{ miscitas.fechacita }}" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="time" id="txthoracita" name="txthoracita" class="form-control" value="{{ miscitas.horacita }}" minlength="1" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtmotivo" name="txtmotivo" class="form-control" value="{{ miscitas.motivo }}" minlength="1" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtestado" name="txtestado" class="form-control" value="{{ miscitas.estado }}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-dark">Cambiar Cita</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div> 
+</div> 
+
+{% endblock %}
