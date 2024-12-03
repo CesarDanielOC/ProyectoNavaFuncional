@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+    
+{% load static %}
+
+<div class="row"> 
+    
+    <div class="col-sm-8 col-md-4 col-lg-4 col-xl-4"> 
+        <center><h1>Receta</h1>
+        <div class="card"> 
+            
+            <div class="card-body">
+                <form action="registrarReceta/" method="POST"> {% csrf_token %}  
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidreceta" name="txtidreceta" class="form-control" placeholder="ID de la receta" minlength="1" maxlength="6" required>
+                    </div>
+                
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidpaciente" name="txtidpaciente" class="form-control" placeholder="ID del medico" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidmedico" name="txtidmedico" class="form-control" placeholder="ID de la receta" maxlength="10" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="date" id="txtfechareceta" name="txtfechareceta" class="form-control" placeholder="Instrucciones de la receta" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtinstrucciones" name="txtinstrucciones" class="form-control"placeholder="Instrucciones" required>
+                    </div>
+                
+                    <div class="form-group py-2">
+                        <input type="text" id="txtvalidez" name="txtvalidez" class="form-control" placeholder="Doctor que valido la receta" maxlength="100" required>
+                    </div>
+                
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidmedicamento" name="txtidmedicamento" class="form-control" placeholder="ID del/los medicamentos" maxlength="100" required>
+                    </div>
+                
+                    <div class="form-group py-2">
+                        <center><button type="submit" class="btn btn-dark">Recetar Paciente</button></center>
+                    </div>
+                </form>
+                
+            </div>
+        </div> 
+
+    </div> 
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <center><h1>Receta</h1>
+        
+
+
+        <table class="table table-striped">
+            <center><img src="{% static 'images/receta.jpg' %}" alt="Imagen de receta" class="img-fluid" width="400"></center>
+            <thead>
+                <tr>
+                    <th scope="col">ID del paciente</th>
+                    <th scope="col">ID del Medico</th>
+                    <th scope="col">ID de la receta</th>
+                    <th scope="col">Fecha de la receta</th>
+                    <th scope="col">Instrucciones</th>
+                    <th scope="col">Doctor que valido la receta</th>
+                    <th scope="col">ID de medicamentos</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in misrecetas %}
+                    <tr>
+                        <td> {{m.idreceta}} </td>
+                        <td> {{m.idpaciente}} </td>
+                        <td> {{m.idmedico}} </td>
+                        <td> {{m.fechareceta}} </td>
+                        <td> {{m.instrucciones}} </td>
+                        <td> {{m.validez}} </td>
+                        <td> {{m.idmedicamento}} </td>
+                        <td><a href="{% url 'seleccionarReceta/' m.idreceta %}" class="btn btn-secondary">Editar</a></td>
+                        <td><a href="{% url 'borrarReceta/' m.idreceta %}" class="btn btn-dark">Borrar</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div> 
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"> <!-- Fila en editar-->
+    <div class="col-md-4 offset-md-4">
+        <center><h2>Editar Receta</h2></center>
+
+
+
+        <div class="card"> 
+            <div class="card-body">
+                <form action="/Receta/editarReceta/" method="POST"> {% csrf_token %}
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidreceta" name="txtidreceta" class="form-control" value="{{ mirecetas.idreceta }}" minlength="1" maxlength="6" readonly>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidpaciente" name="txtidpaciente" class="form-control" value="{{ mirecetas.idpaciente }}" maxlength="100" required>
+                    </div>
+                    
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidmedico" name="txtidmedico" class="form-control" value="{{mirecetas.idmedico}}" maxlength="100" required>
+                    </div>
+                    
+                    <div class="form-group py-2">
+                        <input type="date" id="txtfechareceta" name="txtfechareceta" class="form-control" value="{{mirecetas.fechareceta}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtinstrucciones" name="txtinstrucciones" class="form-control" value="{{mirecetas.instrucciones}}" minlength="1" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtvalidez" name="txtvalidez" class="form-control" value="{{mirecetas.validez}}" minlength="1" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtidmedicamento" name="txtidmedicamento" class="form-control" value="{{mirecetas.idmedicamento}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <center><button type="submit" class="btn btn-dark">Editar receta del paciente</button></center>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+        <!-- Aquí codigo tarjeta -->
+    </div> 
+</div> <!-- Fila en editar-->
+
+{% endblock %}
